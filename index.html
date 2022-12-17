@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Calculator</title>
+</head>
+<body>
+    <h1>Calculator</h1>
+
+    <div id="mainContainer">
+
+        <div id="displayScreen" class="screen">Display</div>
+        <div id="inputScreen"   class="screen">Input</div>
+
+        <div id="buttonContainer">
+            <!-- 1st Row -->
+            <div id="row1">
+                <button id="backspace"     class="button">          DEL</button>
+                <button id="clear"         class="button">        CLEAR</button>
+            </div>
+
+
+            <!-- 2nd Row -->
+            <div id="row2">
+                <button id="seven" value="7"  class="button digit">    7</button>
+                <button id="eight" value="8"  class="button digit">    8</button>
+                <button id="nine"  value="9"  class="button digit">    9</button>
+                <button id="divide"           class="button operator"> /</button>
+                <button id="squareRoot"       class="button operator"> &#8730</button>
+            </div>
+
+
+            <!-- 3rd Row -->
+            <div id="row3">
+                <button id="four"  value="4"  class="button digit">    4</button>
+                <button id="five"  value="5"  class="button digit">    5</button>
+                <button id="six"   value="6"  class="button digit">    6</button>
+                <button id="multiply"         class="button operator"> x</button>
+                <button id="square"           class="button operator"> X<sup>2</sup></button>
+            </div>
+
+
+            <!-- 4th Row -->
+            <div id="row4">
+                <button id="one"   value="1"  class="button digit">    1</button>
+                <button id="two"   value="2"  class="button digit">    2</button>
+                <button id="three" value="3"  class="button digit">    3</button>
+                <button id="subtract"         class="button operator"> -</button>
+                <button class="blank">                                  </button>
+            </div>    
+
+
+            <!-- 5th Row -->
+            <div id="row5">
+                <button class="blank">                                  </button>
+                <button id="zero"  value="0"  class="button digit">    0</button>
+                <button id="decimal"          class="button">          .</button>
+                <button id="add"              class="button operator"> +</button>
+                <button class="blank">                                  </button>
+            </div>
+
+            <!-- Bottom Right -->
+            <div id="row6">
+                <button class="blank">                                  </button>
+                <button class="blank">                                  </button>
+                <button class="blank">                                  </button>
+                <button class="blank">                                  </button>
+                <button id="equal"         class="button operator">    =</button>
+            </div>
+            
+        </div>       
+    </div>
+</body>
+</html>
