@@ -33,6 +33,7 @@ body * {
 #displayScreen {
     height: 96px;
     display: flex;
+    text-align: right;
     justify-content: flex-end;
     align-items: flex-end;
 }

@@ -13,7 +13,7 @@ const logScreen = document.getElementById("displayScreen");
 const inputScreen   = document.getElementById("inputScreen");
 
 
-let log = [];
+let storedLog = [];
 let storedInput = '';
 let storedOperator = undefined;
 
@@ -28,15 +28,15 @@ function updateInputDisplay(){
     inputScreen.innerHTML = storedInput;
 }
 
-function updateLogDisplay(){
+function updateLogDisplay(answer){
     logScreen.innerHTML = '';
 
-    log.push(storedInput);
-    if (log.length == 6){
-        log.shift();
+    storedLog.push(storedInput + `=${answer}`);
+    if (storedLog.length == 6){
+        storedLog.shift();
     }
 
-    log.forEach((line) =>
+    storedLog.forEach((line) =>
     logScreen.innerHTML += `${line} <br>`);
 }
 
@@ -70,9 +70,11 @@ function equals(){
         secondDigit = 
         parseInt(storedInput.slice(storedInput.indexOf(storedOperator) +1));
     }
-    updateLogDisplay();
 
-    storedInput = calculation(firstDigit, secondDigit, storedOperator);
+    let answer = calculation(firstDigit, secondDigit, storedOperator);
+    updateLogDisplay(answer);
+    
+    storedInput = answer;
     updateInputDisplay();
 
     console.log(`Calculating result of 
@@ -107,13 +109,13 @@ function calculation(firstDigit, secondDigit=undefined, operator){
 // Clear all variables used for calculation and input display, and require
 // that the next input be a number (not an operator)
 function clear(){
-    storedInput    = '';
+    storedInput     = '';
+    storedLog             = [];
     storedOperator  = undefined;
     firstDigit      = undefined;
     secondDigit     = undefined;
 
     inputScreen.innerHTML = storedInput;
-    numberNext = true;
     console.log("Screen cleared");
 }
 
