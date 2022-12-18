@@ -24,6 +24,9 @@ let secondDigit = undefined;
 ////////// DECLARE FUNCTIONS //////////
 //////////////////////////////////////
 
+// TODO: Change parseInt to floats and round the numbers to reasonable length
+//       Add decimal point functionality (limit to one per digit input)
+
 function updateInputDisplay(){
     inputScreen.innerHTML = storedInput;
 }
@@ -73,7 +76,7 @@ function equals(){
 
     let answer = calculation(firstDigit, secondDigit, storedOperator);
     updateLogDisplay(answer);
-    
+
     storedInput = answer;
     updateInputDisplay();
 
@@ -115,6 +118,7 @@ function clear(){
     firstDigit      = undefined;
     secondDigit     = undefined;
 
+    logScreen.innerHTML = storedLog;
     inputScreen.innerHTML = storedInput;
     console.log("Screen cleared");
 }
