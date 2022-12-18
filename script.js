@@ -31,9 +31,9 @@ function updateInputDisplay(){
 function updateLogDisplay(){
     logScreen.innerHTML = '';
 
-    log.unshift(storedInput);
-    if (log.length == 5){
-        log.pop();
+    log.push(storedInput);
+    if (log.length == 6){
+        log.shift();
     }
 
     log.forEach((line) =>
@@ -51,38 +51,56 @@ function addValue(digit){
 function addOperator(operator){
     if (storedOperator) return;
 
-    storedOperator = operator.id;
+    if (storedInput){
+        firstDigit = parseInt(storedInput);
+    }
+
     storedInput += operator.innerHTML.replace(' ', '');
+    storedOperator = storedInput.slice(-1);
+
     updateInputDisplay();
     console.log(storedOperator);
     
 }
 
 function equals(){
-    if (!firstDigit || !storedOperator) return;
+    if (!firstDigit || !storedOperator || !storedInput) return;
 
+    if (storedOperator != 'squareRoot'){
+        secondDigit = 
+        parseInt(storedInput.slice(storedInput.indexOf(storedOperator) +1));
+    }
     updateLogDisplay();
-    
+
+    storedInput = calculation(firstDigit, secondDigit, storedOperator);
+    updateInputDisplay();
+
+    console.log(`Calculating result of 
+    ${firstDigit} ${storedOperator} ${secondDigit}`)
+
+    firstDigit = storedInput;
+    storedOperator = undefined;
 }
 
 function calculation(firstDigit, secondDigit=undefined, operator){
-    if (operator == 'add'){
+    if (operator == '+'){
         return firstDigit + secondDigit;
     }
-    if (operator == 'subtract'){
+    if (operator == '-'){
         return firstDigit - secondDigit;
     }
-    if (operator == 'multiply'){
+    if (operator == 'x'){
         return firstDigit * secondDigit;
     }
-    if (operator == 'divide'){
+    if (operator == '/'){
         return firstDigit / secondDigit;
     }
-    if (operator == 'exponent'){
+    if (operator == '^'){
         return firstDigit ** secondDigit;
     }
-    if (operator == 'squareRoot'){
+    if (operator == '√'){
         return Math.sqrt(firstDigit);
+        console.log("square root");
     }
 }
 
@@ -100,12 +118,11 @@ function clear(){
 }
 
 function backspace(){
-    if (numberNext){
+    if (storedOperator){
         storedOperator = undefined;
-        numberNext = false;
-        return;
     }
     storedInput = storedInput.slice(0, -1);
+    updateInputDisplay();
 }
 
 /////////////////////////////////////////////
