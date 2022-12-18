@@ -71,6 +71,11 @@ button {
     font-size: 18px;
 }
 
+button:hover:not(.blank) {
+    background-color: #404040;
+    font-size: 20px;
+}
+
 button.digit {
     border-radius: 5px;
 }
@@ -80,7 +85,7 @@ button#equal {
     border-width: 1px;
 }
 
-button#backspace {
+button#delete {
     background-color: darkred;
 }
 
