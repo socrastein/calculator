@@ -8,8 +8,11 @@ body * {
     flex-direction: column;
     align-items: stretch;
     justify-content: space-evenly;
-    background-color: #363636;
+    background-color: #303030;
     border-radius: 10px;
+    border-width: 4px;
+    border-color: grey;
+    border-style: outset;
     margin: 2% auto;
     width: 300px;
     max-height: 60dh;
@@ -62,9 +65,9 @@ body * {
 button {
     color: white;
     background-color: #363636;
-    border-color: black;
+    border-color: #404040;
     border-width: 1.5px;
-    border-style: solid;
+    border-style: outset;
     border-radius: 5px;
     flex: 1 0 48px;
     min-height: 36px;
@@ -77,13 +80,17 @@ button:hover:not(.blank) {
     font-size: 20px;
 }
 
-button.digit {
-    border-radius: 5px;
+button.operator {
+    background-color: #202020;
 }
 
 button#equal {
     background-color: darkgreen;
     border-width: 1px;
+}
+
+button#clear {
+    background-color: rgb(57, 50, 65);
 }
 
 button#delete {
