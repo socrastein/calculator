@@ -3,8 +3,14 @@ body * {
     font-family: roboto;
 }
 
+@font-face {
+    font-family: calcFont;
+    src: url(./calculator/Calculator.ttf);
+}
+
 #mainContainer {
     display: flex;
+    font-family: calcFont, roboto, monospace;
     flex-direction: column;
     align-items: stretch;
     justify-content: space-evenly;
@@ -22,6 +28,7 @@ body * {
 
 .screen {
     color: white;
+    font-family: calcFont;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
@@ -37,12 +44,14 @@ body * {
     height: 96px;
     display: flex;
     text-align: right;
+    font-size: 20px;
     justify-content: flex-end;
     align-items: flex-end;
 }
 
 #inputScreen {
     height: 36px;
+    font-size: 24px;
 }
 
 

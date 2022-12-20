@@ -41,7 +41,7 @@ function updateLogDisplay(answer){
 
     // Prevent overflow of log screen by deleting oldest result 
     storedLog.push(storedInput + ` = ${answer}`);
-    if (storedLog.length == 6){
+    if (storedLog.length == 5){
         storedLog.shift();
     }
 
