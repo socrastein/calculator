@@ -2,6 +2,9 @@
 ////////// DECLARE VARIABLES //////////
 //////////////////////////////////////
 
+const logScreen     = document.getElementById("displayScreen");
+const inputScreen   = document.getElementById("inputScreen");
+
 const digits        = document.querySelectorAll(".digit");
 const operators     = document.querySelectorAll(".operator");
 
@@ -9,26 +12,23 @@ const clearButton   = document.getElementById("clear");
 const deleteButton  = document.getElementById("delete");
 const equalButton   = document.getElementById("equal");
 
-const logScreen     = document.getElementById("displayScreen");
-const inputScreen   = document.getElementById("inputScreen");
-
-
 let storedLog       = [];
 let storedInput     = '';
-let storedOperator  = undefined;
 
 let firstDigit      = undefined;
 let secondDigit     = undefined;
+let storedOperator  = undefined;
 let answer          = undefined;
 
+let decimal         = false;
 let nextInputClears = false;
-let softClear       = false;
+
 
 ////////////////////////////////////////
 ////////// DECLARE FUNCTIONS //////////
 //////////////////////////////////////
 
-// TODO: Change parseInt to floats and round the numbers to reasonable length
+// TODO: 
 //       Add decimal point functionality (limit to one per digit input)
 
 function updateInputDisplay(){
@@ -39,6 +39,7 @@ function updateInputDisplay(){
 function updateLogDisplay(answer){
     logScreen.innerHTML = '';
 
+    // Prevent overflow of log screen by deleting oldest result 
     storedLog.push(storedInput + ` = ${answer}`);
     if (storedLog.length == 6){
         storedLog.shift();
@@ -50,35 +51,33 @@ function updateLogDisplay(answer){
 
 
 function addValue(digit){
+    // After infinity and zero division errors, soft clear()
     if (nextInputClears == true){
-        softClear = true;
         clear();
-
-        softClear = false;
-        nextInputClears = false;
     }
 
     // If new digit is entered after getting an answer, replace answer
-    // with the next digit instead of tacking it on 
+    // with digit instead of tacking it on 
     if (storedInput == answer){
         storedInput = '';
         firstDigit = undefined;
     }
 
+    if (digit == "."){
+        console.log("Decimal input");
+        if (decimal) return;
+        else {decimal = true};
+    }
+
     storedInput += digit;
     updateInputDisplay();
 
-    // console.log(storedInput);
 }
 
 
 function addOperator(operator){
     if (nextInputClears == true){
-        softClear = true;
         clear();
-
-        softClear = false;
-        nextInputClears = false;
         return
     }
 
@@ -97,6 +96,7 @@ function addOperator(operator){
 
     storedInput += operator.value;
     storedOperator = operator.value;
+    decimal = false;
 
     updateInputDisplay();
 
@@ -142,6 +142,7 @@ function equals(){
 
     firstDigit = storedInput;
     storedOperator = undefined;
+    decimal = false;
 }
 
 
@@ -177,24 +178,38 @@ function clear(){
     storedOperator  = undefined;
     firstDigit      = undefined;
     secondDigit     = undefined;
+    decimal         = false;
 
     inputScreen.innerHTML = storedInput;
 
     // Leave log displayed if clearing after an error
-    if (softClear == false){
-        storedLog   = [];
-        logScreen.innerHTML = storedLog;
+    if (nextInputClears){
+        nextInputClears = false;
+        return
     }
+
+    storedLog   = [];
+    logScreen.innerHTML = storedLog;
 }
 
 
 function backspace(){
+    if (nextInputClears == true){
+        clear();
+        return
+    }
+
     if (storedOperator){
         if (storedInput.slice(-1) == storedOperator){
             storedOperator = undefined;
         }
     }
+
     storedInput = storedInput.slice(0, -1);
+    if (storedInput.includes('.')){
+        decimal = true;
+    } else {decimal = false};
+
     updateInputDisplay();
 }
 
@@ -211,8 +226,3 @@ operators.forEach((operator) =>
 clearButton.addEventListener('click',  clear);
 deleteButton.addEventListener('click', backspace);
 equalButton.addEventListener('click',  equals);
-
-
-
-
-
