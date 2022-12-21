@@ -100,6 +100,10 @@ function addOperator(operator){
 
     updateInputDisplay();
 
+    if (storedOperator == '√'){
+        equals();
+    }
+
     // console.log(storedOperator);
     
 }
@@ -108,7 +112,7 @@ function addOperator(operator){
 function equals(){
     if (!firstDigit || !storedOperator || !storedInput) return;
 
-    if (storedOperator != 'squareRoot'){
+    if (storedOperator != '√'){
         secondDigit = 
         parseFloat(storedInput.slice(storedInput.indexOf(storedOperator) +1));
     }
