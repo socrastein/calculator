@@ -114,4 +114,18 @@ button.blank {
     z-index: -100;
 }
 
+footer {
+    position: fixed;
+    bottom: 0px;
+    padding-bottom: 1rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
 
+#gitLogo {
+    height: 2rem;
+    width: 2rem;
+}
